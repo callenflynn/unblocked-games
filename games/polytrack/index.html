@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Invaders - C Unblocked Games</title>
+    <title>Polytrack v0.2.0 - C Unblocked Games</title>
     <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
@@ -16,32 +16,20 @@
         <aside class="sidebar">
             <button class="home-btn" onclick="window.location.href='../../index.html'">🏠 Home</button>
             <h3 style="margin-bottom: 15px;">Other Games</h3>
-            <ul class="game-list">
-                <li><a href="../cubes/index.html">🎮 Falling Cubes</a></li>
-                <li><a href="../sudoku/index.html">🔢 Sudoku</a></li>
-                <li><a href="../sandtris/index.html">🏖️ Sandtris</a></li>
-                <li><a href="../2048/index.html">🎯 2048</a></li>
-                <li><a href="../trex/index.html">🦖 T-Rex Runner</a></li>
-                <li><a href="../hextris/index.html">🔷 Hextris</a></li>
-                <li><a href="../cookie-clicker/index.html">🍪 Cookie Clicker</a></li>
-                <li><a href="../flappy-bird/index.html">🐦 Flappy Bird</a></li>
-                <li><a href="../breakout/index.html">🧱 Breakout</a></li>
-                <li><a href="../snake/index.html">🐍 Snake</a></li>
-                <li><a href="../pacman/index.html">👻 Pac-Man</a></li>
-                <li><a href="../minesweeper/index.html">💣 Minesweeper</a></li>
-                <li><a href="../space-invaders/index.html" class="active">👾 Space Invaders</a></li>
+            <ul class="game-list" id="gameList">
+                <!-- Games will be loaded dynamically -->
             </ul>
         </aside>
 
         <div class="game-container">
             <div class="game-header">
-                <h2>Space Invaders</h2>
+                <h2>Polytrack v0.2.0</h2>
                 <div style="display: flex; gap: 10px;">
                     <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
                 </div>
             </div>
             <div class="game-frame">
-                <iframe style="width:100%; height:100%; border:none;" src="https://www.patorjk.com/games/space-invaders/" title="Space Invaders" allow="fullscreen; autoplay; clipboard-write"></iframe>
+                <iframe style="width:100%; height:100%; border:none;" srcdoc='<!DOCTYPE html> <html> <head> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/message_box_ui.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/customization.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/debug_ui.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/editor.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/editor_height_selector.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/hint.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/loading_ui.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/menu.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/speedometer.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt//css/theme.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/time_announcer.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/timer.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/track_export_ui.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/track_selection_ui.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/css/transition_system.css"> </head> <body> <canvas id="screen"></canvas> <div id="ui"></div> <div id="transition-layer"></div> <script src="https://cdn.jsdelivr.net/gh/wergboy/NLP@e46f2d7f33015cf93201e664a2e493800c03284d/pt/lib/ammo.js" defer></script> <script type="module" src="https://cdn.jsdelivr.net/gh/wergboy/NLP@22f6094b69b1c9d45e17a82e93a41b7d88f99574/pt/dist/bundle.js" defer></script> </body> </html>' title="Polytrack" allow="fullscreen; autoplay; clipboard-write"></iframe>
             </div>
         </div>
     </div>

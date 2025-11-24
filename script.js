@@ -248,3 +248,55 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+// Game list data
+const allGames = [
+    { name: 'Falling Cubes', icon: '🎮', path: 'cubes' },
+    { name: 'Sudoku', icon: '🔢', path: 'sudoku' },
+    { name: 'Sandtris', icon: '🏖️', path: 'sandtris' },
+    { name: '2048', icon: '🎯', path: '2048' },
+    { name: 'T-Rex Runner', icon: '🦖', path: 'trex' },
+    { name: 'Hextris', icon: '🔷', path: 'hextris' },
+    { name: 'Cookie Clicker', icon: '🍪', path: 'cookie-clicker' },
+    { name: 'Flappy Bird', icon: '🐦', path: 'flappy-bird' },
+    { name: 'Breakout', icon: '🧱', path: 'breakout' },
+    { name: 'Minesweeper', icon: '💣', path: 'minesweeper' },
+    { name: 'Knife Madness', icon: '🔪', path: 'knife-madness' },
+    { name: 'Moto Race City', icon: '🏍️', path: 'moto-race-city' },
+    { name: 'Polytrack', icon: '🏎️', path: 'polytrack' }
+];
+
+// Load random games in sidebar
+function loadRandomGames() {
+    const gameList = document.getElementById('gameList');
+    if (!gameList) return;
+    
+    // Get current game path from URL
+    const currentPath = window.location.pathname;
+    const currentGame = currentPath.split('/').filter(Boolean).pop();
+    
+    // Filter out current game and shuffle
+    const otherGames = allGames.filter(game => !currentPath.includes(game.path));
+    const shuffled = otherGames.sort(() => Math.random() - 0.5);
+    const randomGames = shuffled.slice(0, 10);
+    
+    // Clear existing list
+    gameList.innerHTML = '';
+    
+    // Add random games
+    randomGames.forEach(game => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `../${game.path}/index.html`;
+        a.textContent = `${game.icon} ${game.name}`;
+        li.appendChild(a);
+        gameList.appendChild(li);
+    });
+}
+
+// Load games when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadRandomGames);
+} else {
+    loadRandomGames();
+}
