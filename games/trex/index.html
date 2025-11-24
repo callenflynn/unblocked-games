@@ -3,38 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incognito Proxies - C Unblocked Games</title>
+    <title>T-Rex Runner - C Unblocked Games</title>
     <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
     <header>
-        <h1>🕵️ Incognito Proxies</h1>
+        <h1>C Unblocked Games</h1>
         <button id="settingsBtn" class="settings-btn">⚙️ Settings</button>
     </header>
 
-    <div style="text-align: center; padding: 20px;">
-        <button class="home-btn" onclick="window.location.href='../index.html'" style="display: inline-block; margin-bottom: 10px;">⬅️ Back to Proxies</button>
-        <button class="home-btn" onclick="window.location.href='../../index.html'" style="display: inline-block; margin-bottom: 10px; margin-left: 10px;">🏠 Home</button>
-    </div>
+    <div class="game-page">
+        <aside class="sidebar">
+            <button class="home-btn" onclick="window.location.href='../../index.html'">🏠 Home</button>
+            <h3 style="margin-bottom: 15px;">Other Games</h3>
+            <ul class="game-list">
+                <li><a href="../cubes/index.html">🎮 Falling Cubes</a></li>
+                <li><a href="../sudoku/index.html">🔢 Sudoku</a></li>
+                <li><a href="../sandtris/index.html">🏖️ Sandtris</a></li>
+                <li><a href="../2048/index.html">🎯 2048</a></li>
+                <li><a href="../trex/index.html" class="active">🦖 T-Rex Runner</a></li>
+                <li><a href="../hextris/index.html">🔷 Hextris</a></li>
+                <li><a href="../cookie-clicker/index.html">🍪 Cookie Clicker</a></li>
+                <li><a href="../flappy-bird/index.html">🐦 Flappy Bird</a></li>
+                <li><a href="../breakout/index.html">🧱 Breakout</a></li>
+                <li><a href="../snake/index.html">🐍 Snake</a></li>
+                <li><a href="../pacman/index.html">👻 Pac-Man</a></li>
+                <li><a href="../minesweeper/index.html">💣 Minesweeper</a></li>
+                <li><a href="../space-invaders/index.html">👾 Space Invaders</a></li>
+            </ul>
+        </aside>
 
-    <section class="proxies-section">
-        <h2>Select an Incognito Proxy</h2>
-        <p class="proxy-note">⚠️ Ready for new verified proxy links</p>
-        <div class="proxy-category">
-            <div class="proxy-buttons">
-                <!-- Proxy links will be added here -->
-                <button class="proxy-btn" onclick="window.location.href='proxy1.html'">Incognito 1</button>
-                <button class="proxy-btn" onclick="window.location.href='proxy2.html'">Incognito 2</button>
-                <button class="proxy-btn" onclick="window.location.href='proxy3.html'">Incognito 3</button>
-                <button class="proxy-btn" onclick="window.location.href='proxy4.html'">Incognito 4</button>
-                <button class="proxy-btn" onclick="window.location.href='proxy5.html'">Incognito 5</button>
-                <button class="proxy-btn" onclick="window.location.href='proxy6.html'">Incognito 6</button>
-                <button class="proxy-btn" onclick="window.location.href='proxy7.html'">Incognito 7</button>
-                <button class="proxy-btn" onclick="window.location.href='proxy8.html'">Incognito 8</button>
-                <button class="proxy-btn" onclick="window.location.href='proxy9.html'">Incognito 9</button>
+        <div class="game-container">
+            <div class="game-header">
+                <h2>T-Rex Runner</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+                </div>
+            </div>
+            <div class="game-frame">
+                <iframe style="width:800px; height:600px; border:none;" src="https://wayou.github.io/t-rex-runner/" title="T-Rex Runner" allow="fullscreen; autoplay; clipboard-write"></iframe>
             </div>
         </div>
-    </section>
+    </div>
 
     <div id="settingsModal" class="modal">
         <div class="modal-content">

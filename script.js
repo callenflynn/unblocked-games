@@ -146,16 +146,36 @@ if (document.readyState === 'loading') {
 function openInBlank(url) {
     const win = window.open('about:blank', '_blank');
     if (win) {
-        // Check if URL is external (starts with http)
-        const fullUrl = url.startsWith('http') ? url : window.location.origin + '/' + url;
+        // Determine the full URL
+        let fullUrl;
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+            // External URL - use as is
+            fullUrl = url;
+        } else {
+            // Relative URL - build full path
+            const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+            fullUrl = baseUrl + '/' + url;
+        }
+        
+        // Write content to the new window
+        win.document.open();
         win.document.write(`
             <!DOCTYPE html>
             <html>
             <head>
                 <title>Loading...</title>
                 <style>
-                    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-                    iframe { width: 100%; height: 100%; border: none; }
+                    * { margin: 0; padding: 0; box-sizing: border-box; }
+                    body, html { height: 100%; overflow: hidden; background: #000; }
+                    iframe { 
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%; 
+                        height: 100%; 
+                        border: none;
+                        display: block;
+                    }
                 </style>
             </head>
             <body>
@@ -164,6 +184,8 @@ function openInBlank(url) {
             </html>
         `);
         win.document.close();
+    } else {
+        alert('Please allow popups for stealth mode to work!');
     }
 }
 
