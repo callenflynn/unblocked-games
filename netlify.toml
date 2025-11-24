@@ -1,0 +1,19 @@
+[build]
+  publish = "."
+  command = "echo 'No build needed - static site with serverless functions'"
+
+[functions]
+  directory = "api"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer-when-downgrade"

@@ -422,6 +422,45 @@
 
     <script src="script.js"></script>
     <script>
+        const host = window.location.hostname;
+        const isGitHub = host.endsWith("github.io");
+
+        if (isGitHub) {
+            const banner = document.createElement('div');
+            banner.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%);
+                color: white;
+                padding: 15px 20px;
+                text-align: center;
+                z-index: 10000;
+                border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            `;
+            banner.innerHTML = `
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <strong style="font-size: 1.1rem;">⚠️ Limited Functionality Warning</strong>
+                    <p style="margin: 10px 0 5px 0; font-size: 0.95rem;">
+                        You are using GitHub Pages. Proxy features and API functions will NOT work here.
+                        <br><strong>For full functionality, please use one of our serverless deployments:</strong>
+                    </p>
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+                        <a href="https://unblocked-games.vercel.app" style="background: rgba(255, 255, 255, 0.2); color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255, 255, 255, 0.3);">🚀 Vercel (Recommended)</a>
+                        <a href="https://unblocked-games.netlify.app" style="background: rgba(255, 255, 255, 0.2); color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255, 255, 255, 0.3);">⚡ Netlify</a>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="margin-top: 10px; background: rgba(255, 255, 255, 0.3); color: white; border: 2px solid rgba(255, 255, 255, 0.4); padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">✕ Dismiss</button>
+                </div>
+            `;
+            document.body.prepend(banner);
+            
+            // Adjust body padding to account for banner
+            document.body.style.paddingTop = '180px';
+        }
+
         // Fetch and display version info
         async function loadVersionInfo() {
             try {
