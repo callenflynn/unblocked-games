@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxies - C Unblocked Games</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>C Unblocked Games - Proxies</h1>
+        <button id="settingsBtn" class="settings-btn">⚙️ Settings</button>
+    </header>
+
+    <div style="text-align: center; padding: 20px;">
+        <button class="home-btn" onclick="window.location.href='../index.html'" style="display: inline-block; margin-bottom: 30px;">🏠 Back to Home</button>
+    </div>
+
+    <main class="gallery-container">
+        <div class="game-card" onclick="window.location.href='interstellar/index.html'">
+            <div class="game-thumbnail">
+                <div class="game-icon">🌟</div>
+            </div>
+            <h3>Interstellar Proxy</h3>
+            <p>18 available proxies - Recommended for beginners</p>
+        </div>
+
+        <div class="game-card" onclick="window.location.href='nebula/index.html'">
+            <div class="game-thumbnail">
+                <div class="game-icon">🌌</div>
+            </div>
+            <h3>Nebula Proxy</h3>
+            <p>3 available proxies</p>
+        </div>
+
+        <div class="game-card" onclick="window.location.href='rammerhead/index.html'">
+            <div class="game-thumbnail">
+                <div class="game-icon">🔨</div>
+            </div>
+            <h3>Rammerhead Proxy</h3>
+            <p>7 available proxies</p>
+        </div>
+
+        <div class="game-card" onclick="window.location.href='junkyard/index.html'">
+            <div class="game-thumbnail">
+                <div class="game-icon">🗑️</div>
+            </div>
+            <h3>Junkyard Proxy</h3>
+            <p>75+ available proxies</p>
+        </div>
+
+        <div class="game-card" onclick="window.location.href='incognito/index.html'">
+            <div class="game-thumbnail">
+                <div class="game-icon">🕵️</div>
+            </div>
+            <h3>Incognito Proxy</h3>
+            <p>9 available proxies</p>
+        </div>
+    </main>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Settings</h2>
+            <div class="setting-group">
+                <label for="tabName">Custom Tab Name:</label>
+                <input type="text" id="tabName" placeholder="Enter custom tab name">
+                <button onclick="applyTabName()">Apply</button>
+            </div>
+            <div class="setting-group">
+                <label>Tab Icon:</label>
+                <div class="icon-options">
+                    <button class="icon-btn" onclick="setTabIcon('google-classroom')">
+                        <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom">
+                        <span>Google Classroom</span>
+                    </button>
+                    <button class="icon-btn" onclick="setTabIcon('google-docs')">
+                        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs">
+                        <span>Google Docs</span>
+                    </button>
+                    <button class="icon-btn" onclick="setTabIcon('google-drive')">
+                        <img src="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" alt="Google Drive">
+                        <span>Google Drive</span>
+                    </button>
+                    <button class="icon-btn" onclick="setTabIcon('default')">
+                        <span>🎮</span>
+                        <span>Default</span>
+                    </button>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label for="customIcon">Custom Icon URL:</label>
+                <input type="text" id="customIcon" placeholder="Enter custom icon URL">
+                <button onclick="applyCustomIcon()">Apply</button>
+            </div>
+            <button class="reset-btn" onclick="resetSettings()">Reset to Default</button>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
