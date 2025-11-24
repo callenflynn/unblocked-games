@@ -6,10 +6,49 @@ const iconUrls = {
     'default': ''
 };
 
+// Blob cloaking functionality
+function enableBlobCloak() {
+    if (window.location.protocol === 'blob:') return; // Already cloaked
+    
+    // Get the current page HTML
+    fetch(window.location.href)
+        .then(response => response.text())
+        .then(html => {
+            // Create a blob from the HTML
+            const blob = new Blob([html], { type: 'text/html' });
+            const blobUrl = URL.createObjectURL(blob);
+            
+            // Open the blob URL in the current window
+            window.location.replace(blobUrl);
+        })
+        .catch(error => {
+            console.error('Blob cloaking failed:', error);
+        });
+}
+
+function toggleBlobCloak() {
+    const toggle = document.getElementById('blobCloakToggle');
+    if (toggle.checked) {
+        localStorage.setItem('blobCloakEnabled', 'true');
+        enableBlobCloak();
+    } else {
+        localStorage.setItem('blobCloakEnabled', 'false');
+        // Reload to normal URL
+        if (window.location.protocol === 'blob:') {
+            window.location.href = window.location.origin;
+        }
+    }
+}
+
+function toggleBlobInfo() {
+    document.getElementById('blobInfoModal').style.display = 'block';
+}
+
 // Load saved settings
 function loadSettings() {
     const savedTitle = localStorage.getItem('customTabName');
     const savedIcon = localStorage.getItem('customTabIcon');
+    const blobCloakEnabled = localStorage.getItem('blobCloakEnabled') === 'true';
     
     if (savedTitle) {
         document.title = savedTitle;
@@ -17,6 +56,17 @@ function loadSettings() {
     
     if (savedIcon) {
         setFavicon(savedIcon);
+    }
+    
+    // Set blob cloak toggle state
+    const toggle = document.getElementById('blobCloakToggle');
+    if (toggle) {
+        toggle.checked = blobCloakEnabled;
+    }
+    
+    // Auto-enable blob cloak if setting is saved
+    if (blobCloakEnabled && window.location.protocol !== 'blob:') {
+        enableBlobCloak();
     }
 }
 
@@ -66,11 +116,19 @@ function applyCustomIcon() {
 function resetSettings() {
     localStorage.removeItem('customTabName');
     localStorage.removeItem('customTabIcon');
+    localStorage.removeItem('blobCloakEnabled');
     document.title = 'C Unblocked Games';
     const link = document.querySelector("link[rel~='icon']");
     if (link) link.remove();
     document.getElementById('tabName').value = '';
     document.getElementById('customIcon').value = '';
+    const toggle = document.getElementById('blobCloakToggle');
+    if (toggle) toggle.checked = false;
+    
+    // Reload if currently in blob mode
+    if (window.location.protocol === 'blob:') {
+        window.location.href = window.location.origin;
+    }
 }
 
 // Modal functionality
@@ -91,8 +149,15 @@ if (span) {
 }
 
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
+    const settingsModal = document.getElementById('settingsModal');
+    const blobInfoModal = document.getElementById('blobInfoModal');
+    
+    if (event.target == settingsModal) {
+        settingsModal.style.display = 'none';
+    }
+    
+    if (event.target == blobInfoModal) {
+        blobInfoModal.style.display = 'none';
     }
 }
 
