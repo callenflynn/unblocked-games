@@ -99,6 +99,49 @@ window.onclick = function(event) {
 // Load settings on page load
 loadSettings();
 
+// Load game preview images
+async function loadGamePreviews() {
+    const gamePreviews = document.querySelectorAll('.game-preview');
+    
+    gamePreviews.forEach(async (img) => {
+        const searchQuery = img.getAttribute('data-search');
+        if (!searchQuery) return;
+        
+        try {
+            // Use Unsplash API for game-related images (free, no API key needed for basic usage)
+            const unsplashUrl = `https://source.unsplash.com/300x200/?${encodeURIComponent(searchQuery)}`;
+            
+            // Alternative: Use a placeholder service with the game name
+            const fallbackUrl = `https://via.placeholder.com/300x200/667eea/ffffff?text=${encodeURIComponent(searchQuery)}`;
+            
+            // Try to load the image
+            const testImg = new Image();
+            testImg.onload = function() {
+                const thumbnail = img.parentElement;
+                thumbnail.style.backgroundImage = `url('${unsplashUrl}')`;
+                thumbnail.style.backgroundSize = 'cover';
+                thumbnail.style.backgroundPosition = 'center';
+            };
+            testImg.onerror = function() {
+                // Use fallback if Unsplash fails
+                const thumbnail = img.parentElement;
+                thumbnail.style.backgroundImage = `url('${fallbackUrl}')`;
+            };
+            testImg.src = unsplashUrl;
+            
+        } catch (error) {
+            console.log('Error loading game preview:', error);
+        }
+    });
+}
+
+// Load game previews when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadGamePreviews);
+} else {
+    loadGamePreviews();
+}
+
 // About:blank stealth mode function
 function openInBlank(url) {
     const win = window.open('about:blank', '_blank');

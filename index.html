@@ -9,13 +9,16 @@
 <body>
     <header>
         <h1>C Unblocked Games</h1>
-        <button id="settingsBtn" class="settings-btn">⚙️ Settings</button>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button onclick="window.location.href='mirrors.html'" class="settings-btn" style="background: rgba(74, 222, 128, 0.2); border-color: rgba(74, 222, 128, 0.3);">🔗 Mirrors</button>
+            <button id="settingsBtn" class="settings-btn">⚙️ Settings</button>
+        </div>
     </header>
 
     <main class="gallery-container">
         <div class="game-card">
-            <div class="game-thumbnail">
-                <div class="game-icon">🎮</div>
+            <div class="game-thumbnail" style="background-image: url('https://via.placeholder.com/300x200/667eea/ffffff?text=Loading...'); background-size: cover; background-position: center;">
+                <img class="game-preview" data-search="falling cubes game" alt="Falling Cubes" style="display: none;">
             </div>
             <h3>Falling Cubes</h3>
             <p>Stack and match falling cubes</p>
@@ -26,8 +29,8 @@
         </div>
 
         <div class="game-card">
-            <div class="game-thumbnail">
-                <div class="game-icon">🔢</div>
+            <div class="game-thumbnail" style="background-image: url('https://via.placeholder.com/300x200/667eea/ffffff?text=Loading...'); background-size: cover; background-position: center;">
+                <img class="game-preview" data-search="sudoku puzzle game" alt="Sudoku" style="display: none;">
             </div>
             <h3>Sudoku</h3>
             <p>Classic number puzzle game</p>
@@ -38,8 +41,8 @@
         </div>
 
         <div class="game-card">
-            <div class="game-thumbnail">
-                <div class="game-icon">🏃</div>
+            <div class="game-thumbnail" style="background-image: url('https://via.placeholder.com/300x200/667eea/ffffff?text=Loading...'); background-size: cover; background-position: center;">
+                <img class="game-preview" data-search="bubble man runner game" alt="Bubble Man Runner" style="display: none;">
             </div>
             <h3>Bubble Man Runner</h3>
             <p>Run and dodge obstacles</p>
