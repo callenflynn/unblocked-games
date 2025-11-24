@@ -99,39 +99,47 @@ window.onclick = function(event) {
 // Load settings on page load
 loadSettings();
 
-// Load game preview images
+// Load game preview images from actual game URLs
 async function loadGamePreviews() {
-    const gamePreviews = document.querySelectorAll('.game-preview');
+    const gameCards = document.querySelectorAll('.game-card');
     
-    gamePreviews.forEach(async (img) => {
-        const searchQuery = img.getAttribute('data-search');
-        if (!searchQuery) return;
+    gameCards.forEach((card) => {
+        const thumbnail = card.querySelector('.game-thumbnail');
+        const gameUrl = card.getAttribute('data-game-url');
         
-        try {
-            // Use Unsplash API for game-related images (free, no API key needed for basic usage)
-            const unsplashUrl = `https://source.unsplash.com/300x200/?${encodeURIComponent(searchQuery)}`;
-            
-            // Alternative: Use a placeholder service with the game name
-            const fallbackUrl = `https://via.placeholder.com/300x200/667eea/ffffff?text=${encodeURIComponent(searchQuery)}`;
-            
-            // Try to load the image
-            const testImg = new Image();
-            testImg.onload = function() {
-                const thumbnail = img.parentElement;
-                thumbnail.style.backgroundImage = `url('${unsplashUrl}')`;
+        if (!gameUrl || !thumbnail) return;
+        
+        // Create hidden iframe to capture game screenshot
+        const iframe = document.createElement('iframe');
+        iframe.style.cssText = 'position:absolute;width:300px;height:200px;border:none;opacity:0;pointer-events:none;left:-9999px;';
+        iframe.src = gameUrl;
+        
+        document.body.appendChild(iframe);
+        
+        // Wait for iframe to load then capture
+        iframe.onload = function() {
+            try {
+                // For most embedded games, just use the URL as background
+                // since we can't capture cross-origin iframes
+                thumbnail.style.backgroundImage = `url('${gameUrl}')`;
                 thumbnail.style.backgroundSize = 'cover';
                 thumbnail.style.backgroundPosition = 'center';
-            };
-            testImg.onerror = function() {
-                // Use fallback if Unsplash fails
-                const thumbnail = img.parentElement;
-                thumbnail.style.backgroundImage = `url('${fallbackUrl}')`;
-            };
-            testImg.src = unsplashUrl;
+            } catch (error) {
+                console.log('Using direct embed for preview');
+            }
             
-        } catch (error) {
-            console.log('Error loading game preview:', error);
-        }
+            // Remove iframe after a short delay
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 2000);
+        };
+        
+        iframe.onerror = function() {
+            // Fallback to placeholder
+            const gameName = card.querySelector('h3').textContent;
+            thumbnail.style.backgroundImage = `url('https://via.placeholder.com/300x200/667eea/ffffff?text=${encodeURIComponent(gameName)}')`;
+            document.body.removeChild(iframe);
+        };
     });
 }
 

@@ -3,33 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incognito Proxies - C Unblocked Games</title>
+    <title>Interstellar 6 - C Unblocked Games</title>
     <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
     <header>
-        <h1>🕵️ Incognito Proxies</h1>
+        <h1>C Unblocked Games</h1>
         <button id="settingsBtn" class="settings-btn">⚙️ Settings</button>
     </header>
-
-    <div style="text-align: center; padding: 20px;">
-        <button class="home-btn" onclick="window.location.href='../index.html'" style="display: inline-block; margin-bottom: 10px;">⬅️ Back to Proxies</button>
-        <button class="home-btn" onclick="window.location.href='../../index.html'" style="display: inline-block; margin-bottom: 10px; margin-left: 10px;">🏠 Home</button>
+    <div class="game-page">
+        <aside class="sidebar">
+            <button class="home-btn" onclick="window.location.href='index.html'">⬅️ Back</button>
+            <button class="home-btn" onclick="window.location.href='../../index.html'" style="margin-top: 10px;">🏠 Home</button>
+            <h3 style="margin: 15px 0;">Interstellar Proxies</h3>
+            <ul class="game-list">
+                <li><a href="proxy1.html">Interstellar 1</a></li>
+                <li><a href="proxy2.html">Interstellar 2</a></li>
+                <li><a href="proxy3.html">Interstellar 3</a></li>
+                <li><a href="proxy4.html">Interstellar 4</a></li>
+                <li><a href="proxy5.html">Interstellar 5</a></li>
+                <li><a href="proxy6.html" class="active">Interstellar 6</a></li>
+                <li><a href="proxy7.html">Interstellar 7</a></li>
+                <li><a href="proxy8.html">Interstellar 8</a></li>
+                <li><a href="proxy9.html">Interstellar 9</a></li>
+                <li><a href="proxy10.html">Interstellar 10</a></li>
+                <li><a href="proxy11.html">Interstellar 11</a></li>
+                <li><a href="proxy12.html">Interstellar 12</a></li>
+                <li><a href="proxy13.html">Interstellar 13</a></li>
+                <li><a href="proxy14.html">Interstellar 14</a></li>
+                <li><a href="proxy15.html">Interstellar 15</a></li>
+                <li><a href="proxy16.html">Interstellar 16</a></li>
+                <li><a href="proxy17.html">Interstellar 17</a></li>
+                <li><a href="proxy18.html">Interstellar 18</a></li>
+            </ul>
+        </aside>
+        <div class="game-container">
+            <div class="game-header">
+                <h2>Interstellar 6</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="fullscreen-btn" onclick="openInBlank('https://research.africa.com/')">🔒 Stealth</button>
+                    <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+                </div>
+            </div>
+            <div class="game-frame">
+                <iframe style="width:100%; height:600px; border:none;" src="https://research.africa.com/" title="Interstellar Proxy"></iframe>
+            </div>
+        </div>
     </div>
-
-    <section class="proxies-section">
-        <h2>Select a Incognito Proxy</h2>
-        <p class="proxy-note">⚠️ If one link doesn't work, try another</p>
-        <main class="gallery-container">
-                <div class="game-card" onclick="window.location.href='proxy1.html'" data-proxy-url="" style="cursor: pointer;">
-                    <div class="game-thumbnail">
-                        <div class="game-icon">🕵️</div>
-                    </div>
-                    <h3>Incognito 1</h3>
-                    <p>Click to access proxy</p>
-                </div>        </main>
-    </section>
-
     <div id="settingsModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -69,27 +89,5 @@
         </div>
     </div>
     <script src="../../script.js"></script>
-    <script>
-        // Load proxy preview images
-        document.addEventListener('DOMContentLoaded', function() {
-            const proxyCards = document.querySelectorAll('[data-proxy-url]');
-            proxyCards.forEach((card, index) => {
-                const thumbnail = card.querySelector('.game-thumbnail');
-                const proxyNum = index + 1;
-                // Proxy URLs will be fetched and displayed
-                fetch('proxy' + proxyNum + '.html')
-                    .then(response => response.text())
-                    .then(html => {
-                        const match = html.match(/iframe.*?src="([^"]+)"/);
-                        if (match && match[1]) {
-                            card.setAttribute('data-proxy-url', match[1]);
-                            thumbnail.style.backgroundImage = 'url(' + match[1] + ')';
-                            thumbnail.style.backgroundSize = 'cover';
-                            thumbnail.style.backgroundPosition = 'center';
-                        }
-                    });
-            });
-        });
-    </script>
 </body>
 </html>
