@@ -105,41 +105,67 @@ async function loadGamePreviews() {
     
     gameCards.forEach((card) => {
         const thumbnail = card.querySelector('.game-thumbnail');
-        const gameUrl = card.getAttribute('data-game-url');
+        const faviconUrl = thumbnail.getAttribute('data-favicon-url');
         
-        if (!gameUrl || !thumbnail) return;
+        if (!faviconUrl || !thumbnail) return;
         
-        // Create hidden iframe to capture game screenshot
-        const iframe = document.createElement('iframe');
-        iframe.style.cssText = 'position:absolute;width:300px;height:200px;border:none;opacity:0;pointer-events:none;left:-9999px;';
-        iframe.src = gameUrl;
-        
-        document.body.appendChild(iframe);
-        
-        // Wait for iframe to load then capture
-        iframe.onload = function() {
-            try {
-                // For most embedded games, just use the URL as background
-                // since we can't capture cross-origin iframes
-                thumbnail.style.backgroundImage = `url('${gameUrl}')`;
-                thumbnail.style.backgroundSize = 'cover';
-                thumbnail.style.backgroundPosition = 'center';
-            } catch (error) {
-                console.log('Using direct embed for preview');
-            }
+        // Extract domain from URL
+        try {
+            const url = new URL(faviconUrl);
+            const domain = url.origin;
             
-            // Remove iframe after a short delay
-            setTimeout(() => {
-                document.body.removeChild(iframe);
-            }, 2000);
-        };
-        
-        iframe.onerror = function() {
-            // Fallback to placeholder
-            const gameName = card.querySelector('h3').textContent;
-            thumbnail.style.backgroundImage = `url('https://via.placeholder.com/300x200/667eea/ffffff?text=${encodeURIComponent(gameName)}')`;
-            document.body.removeChild(iframe);
-        };
+            // Try multiple favicon locations
+            const faviconPaths = [
+                `${domain}/favicon.ico`,
+                `${domain}/favicon.png`,
+                `${domain}/apple-touch-icon.png`,
+                `${domain}/android-chrome-192x192.png`,
+                `${faviconUrl}` // Try loading the page itself as background
+            ];
+            
+            // Set the game URL as background with overlay
+            thumbnail.style.backgroundImage = `url('${faviconUrl}')`;
+            thumbnail.style.backgroundSize = 'cover';
+            thumbnail.style.backgroundPosition = 'center';
+            
+            // Try to get actual favicon and overlay it
+            const favicon = new Image();
+            favicon.crossOrigin = 'anonymous';
+            
+            let currentIndex = 0;
+            const tryNextFavicon = () => {
+                if (currentIndex < faviconPaths.length) {
+                    favicon.src = faviconPaths[currentIndex];
+                    currentIndex++;
+                }
+            };
+            
+            favicon.onload = function() {
+                // Create a large centered favicon overlay
+                const iconDiv = document.createElement('div');
+                iconDiv.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 80px;
+                    height: 80px;
+                    background-image: url('${favicon.src}');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    z-index: 3;
+                    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+                `;
+                thumbnail.appendChild(iconDiv);
+            };
+            
+            favicon.onerror = tryNextFavicon;
+            tryNextFavicon();
+            
+        } catch (error) {
+            console.log('Error loading game preview:', error);
+        }
     });
 }
 
