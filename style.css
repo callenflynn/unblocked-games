@@ -67,7 +67,9 @@ header h1 {
 
 .game-thumbnail {
     background: rgba(255, 255, 255, 0.1);
-    height: 200px;
+    height: 180px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
     border-radius: 10px;
     display: flex;
     align-items: center;
