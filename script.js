@@ -252,6 +252,7 @@ document.addEventListener('keydown', function(e) {
 // Game list data
 const allGames = [
     { name: 'Falling Cubes', icon: '🎮', path: 'cubes' },
+    { name: 'Kour.io', icon: '🎯', path: 'kour-io' },
     { name: 'Sudoku', icon: '🔢', path: 'sudoku' },
     { name: 'Sandtris', icon: '🏖️', path: 'sandtris' },
     { name: '2048', icon: '🎯', path: '2048' },
