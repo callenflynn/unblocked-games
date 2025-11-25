@@ -327,7 +327,7 @@ if (span) {
 function openProxiesWarning() {
     document.getElementById('proxiesWarningModal').style.display = 'block';
     document.body.classList.add('modal-open');
-    let countdown = 3;
+    let countdown = 5;
     const btn = document.getElementById('understandBtn');
     
     const interval = setInterval(() => {
@@ -543,7 +543,9 @@ const allGames = [
     { name: 'Minesweeper', icon: '💣', path: 'minesweeper' },
     { name: 'Knife Madness', icon: '🔪', path: 'knife-madness' },
     { name: 'Moto Race City', icon: '🏍️', path: 'moto-race-city' },
-    { name: 'Polytrack', icon: '🏎️', path: 'polytrack' }
+    { name: 'Polytrack', icon: '🏎️', path: 'polytrack' },
+    { name: 'Vex 7', icon: '🎭', path: 'vex-7' },
+    { name: 'ChatGPT', icon: '💬', path: 'chatgpt' }
 ];
 
 // Load random games in sidebar
