@@ -133,6 +133,131 @@ if (document.title.includes('C Unblocked Games')) {
     document.title = 'C Games';
 }
 
+// Add seasonal decorations
+function addSeasonalDecorations() {
+    const now = new Date();
+    const month = now.getMonth() + 1; // 1-12
+    const day = now.getDate();
+    
+    // October: Add pumpkins
+    if (month === 10) {
+        addPumpkinBackground();
+    }
+    
+    // November 18-30 or December: Add snowflakes
+    if ((month === 11 && day >= 18 && day <= 30) || month === 12) {
+        addSnowflakes();
+    }
+}
+
+function addPumpkinBackground() {
+    const pumpkinStyle = document.createElement('style');
+    pumpkinStyle.innerHTML = `
+        @keyframes float-pumpkin {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(5deg); opacity: 0.9; }
+        }
+        
+        .pumpkin-decoration {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: float-pumpkin 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        body {
+            background-attachment: fixed;
+        }
+    `;
+    document.head.appendChild(pumpkinStyle);
+    
+    // Add multiple pumpkins around the page
+    const pumpkinCount = 8;
+    for (let i = 0; i < pumpkinCount; i++) {
+        const pumpkin = document.createElement('img');
+        pumpkin.src = 'https://www.pngfind.com/pngs/m/693-6932035_transparent-background-halloween-pumpkin-clipart-hd-png-download.png';
+        pumpkin.className = 'pumpkin-decoration';
+        pumpkin.style.left = (Math.random() * 90) + '%';
+        pumpkin.style.bottom = (Math.random() * 80) + '%';
+        pumpkin.style.width = (40 + Math.random() * 60) + 'px';
+        pumpkin.style.height = 'auto';
+        pumpkin.style.animationDelay = (i * 0.5) + 's';
+        pumpkin.style.animationDuration = (3 + Math.random() * 2) + 's';
+        document.body.appendChild(pumpkin);
+    }
+}
+
+function addSnowflakes() {
+    const snowflakeStyle = document.createElement('style');
+    snowflakeStyle.innerHTML = `
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            25% {
+                transform: translateY(25vh) translateX(50px) rotate(90deg);
+            }
+            50% {
+                transform: translateY(50vh) translateX(-30px) rotate(180deg);
+            }
+            75% {
+                transform: translateY(75vh) translateX(80px) rotate(270deg);
+            }
+            100% {
+                transform: translateY(100vh) translateX(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes snowsway {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(30px); }
+            50% { transform: translateX(-40px); }
+            75% { transform: translateX(25px); }
+        }
+        
+        .snowflake {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.8;
+            animation: snowfall linear forwards, snowsway 4s ease-in-out infinite;
+        }
+    `;
+    document.head.appendChild(snowflakeStyle);
+    
+    // Add snowflakes continuously
+    const snowflakeCount = 30;
+    for (let i = 0; i < snowflakeCount; i++) {
+        const snowflake = document.createElement('img');
+        snowflake.src = 'https://png.pngtree.com/png-clipart/20201009/ourmid/pngtree-blue-symmetrical-graphic-snowflake-clipart-element-png-image_2353391.jpg';
+        snowflake.className = 'snowflake';
+        snowflake.style.left = Math.random() * 100 + '%';
+        snowflake.style.width = (10 + Math.random() * 20) + 'px';
+        snowflake.style.height = 'auto';
+        snowflake.style.animationDuration = (8 + Math.random() * 6) + 's';
+        snowflake.style.animationDelay = (Math.random() * 2) + 's';
+        document.body.appendChild(snowflake);
+        
+        // Add new snowflakes periodically
+        setTimeout(() => {
+            if (document.body.contains(snowflake)) {
+                const newSnowflake = snowflake.cloneNode(true);
+                document.body.appendChild(newSnowflake);
+            }
+        }, (8 + Math.random() * 6) * 1000);
+    }
+}
+
+// Call seasonal decorations on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addSeasonalDecorations);
+} else {
+    addSeasonalDecorations();
+}
+
 const modal = document.getElementById('settingsModal');
 const btn = document.getElementById('settingsBtn');
 const span = document.getElementsByClassName('close')[0];
