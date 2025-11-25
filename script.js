@@ -269,10 +269,15 @@ function addSnowmen() {
     snowmanStyle.innerHTML = `
         .snowman-decoration {
             position: absolute;
-            bottom: 0;
+            bottom: -100px;
             pointer-events: none;
             z-index: 2;
             opacity: 0.9;
+        }
+        
+        body {
+            position: relative;
+            min-height: 100vh;
         }
     `;
     document.head.appendChild(snowmanStyle);
