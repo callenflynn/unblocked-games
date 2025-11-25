@@ -1,4 +1,3 @@
-// Tab cloaking settings
 const iconUrls = {
     'google-classroom': 'https://ssl.gstatic.com/classroom/favicon.png',
     'google-docs': 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico',
@@ -6,19 +5,15 @@ const iconUrls = {
     'default': ''
 };
 
-// Blob cloaking functionality
 function enableBlobCloak() {
     if (window.location.protocol === 'blob:') return; // Already cloaked
     
-    // Get the current page HTML
     fetch(window.location.href)
         .then(response => response.text())
         .then(html => {
-            // Create a blob from the HTML
             const blob = new Blob([html], { type: 'text/html' });
             const blobUrl = URL.createObjectURL(blob);
             
-            // Open the blob URL in the current window
             window.location.replace(blobUrl);
         })
         .catch(error => {
@@ -51,7 +46,6 @@ function toggleBlobInfo() {
     }
 }
 
-// Load saved settings
 function loadSettings() {
     const savedTitle = localStorage.getItem('customTabName');
     const savedIcon = localStorage.getItem('customTabIcon');
@@ -65,13 +59,11 @@ function loadSettings() {
         setFavicon(savedIcon);
     }
     
-    // Set blob cloak toggle state
     const toggle = document.getElementById('blobCloakToggle');
     if (toggle) {
         toggle.checked = blobCloakEnabled;
     }
     
-    // Auto-enable blob cloak if setting is saved
     if (blobCloakEnabled && window.location.protocol !== 'blob:') {
         enableBlobCloak();
     }
@@ -132,13 +124,15 @@ function resetSettings() {
     const toggle = document.getElementById('blobCloakToggle');
     if (toggle) toggle.checked = false;
     
-    // Reload if currently in blob mode
     if (window.location.protocol === 'blob:') {
         window.location.href = window.location.origin;
     }
 }
 
-// Modal functionality
+if (document.title.includes('C Unblocked Games')) {
+    document.title = 'C Games';
+}
+
 const modal = document.getElementById('settingsModal');
 const btn = document.getElementById('settingsBtn');
 const span = document.getElementsByClassName('close')[0];
