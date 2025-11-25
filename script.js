@@ -144,8 +144,8 @@ function addSeasonalDecorations() {
         addPumpkinBackground();
     }
     
-    // November 18-30 or December: Add snowflakes
-    if ((month === 11 && day >= 18 && day <= 30) || month === 12) {
+    // November 17-30 or December: Add snowflakes
+    if ((month === 11 && day >= 17 && day <= 30) || month === 12) {
         addSnowflakes();
     }
 }
@@ -154,8 +154,8 @@ function addPumpkinBackground() {
     const pumpkinStyle = document.createElement('style');
     pumpkinStyle.innerHTML = `
         @keyframes float-pumpkin {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
-            50% { transform: translateY(-20px) rotate(5deg); opacity: 0.9; }
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-15px) rotate(3deg); opacity: 0.8; }
         }
         
         .pumpkin-decoration {
@@ -163,26 +163,26 @@ function addPumpkinBackground() {
             pointer-events: none;
             z-index: 1;
             animation: float-pumpkin 4s ease-in-out infinite;
-            opacity: 0.7;
-        }
-        
-        body {
-            background-attachment: fixed;
+            opacity: 0.6;
         }
     `;
     document.head.appendChild(pumpkinStyle);
     
-    // Add multiple pumpkins around the page
-    const pumpkinCount = 8;
+    // Add a few small pumpkins scattered around the page
+    const pumpkinCount = 5;
     for (let i = 0; i < pumpkinCount; i++) {
         const pumpkin = document.createElement('img');
-        pumpkin.src = 'https://www.pngfind.com/pngs/m/693-6932035_transparent-background-halloween-pumpkin-clipart-hd-png-download.png';
+        // Get the root path - works from any subdirectory
+        const baseUrl = window.location.pathname.includes('/proxies/') || window.location.pathname.includes('/games/') 
+            ? '../../pumpkin.png' 
+            : 'pumpkin.png';
+        pumpkin.src = baseUrl;
         pumpkin.className = 'pumpkin-decoration';
-        pumpkin.style.left = (Math.random() * 90) + '%';
-        pumpkin.style.bottom = (Math.random() * 80) + '%';
-        pumpkin.style.width = (40 + Math.random() * 60) + 'px';
+        pumpkin.style.left = (Math.random() * 85) + 5 + '%';
+        pumpkin.style.top = (Math.random() * 60) + '%';
+        pumpkin.style.width = '30px';
         pumpkin.style.height = 'auto';
-        pumpkin.style.animationDelay = (i * 0.5) + 's';
+        pumpkin.style.animationDelay = (i * 0.4) + 's';
         pumpkin.style.animationDuration = (3 + Math.random() * 2) + 's';
         document.body.appendChild(pumpkin);
     }
@@ -224,7 +224,11 @@ function addSnowflakes() {
     // Function to create a single snowflake
     function createSnowflake() {
         const snowflake = document.createElement('img');
-        snowflake.src = 'https://png.pngtree.com/png-clipart/20201009/ourmid/pngtree-blue-symmetrical-graphic-snowflake-clipart-element-png-image_2353391.jpg';
+        // Get the root path - works from any subdirectory
+        const baseUrl = window.location.pathname.includes('/proxies/') || window.location.pathname.includes('/games/') 
+            ? '../../snowflake.png' 
+            : 'snowflake.png';
+        snowflake.src = baseUrl;
         snowflake.className = 'snowflake';
         
         const startX = Math.random() * window.innerWidth;
