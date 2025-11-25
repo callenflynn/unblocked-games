@@ -193,62 +193,68 @@ function addSnowflakes() {
     snowflakeStyle.innerHTML = `
         @keyframes snowfall {
             0% {
-                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                transform: translateY(-10vh) rotate(0deg);
                 opacity: 1;
             }
-            25% {
-                transform: translateY(25vh) translateX(50px) rotate(90deg);
-            }
-            50% {
-                transform: translateY(50vh) translateX(-30px) rotate(180deg);
-            }
-            75% {
-                transform: translateY(75vh) translateX(80px) rotate(270deg);
-            }
             100% {
-                transform: translateY(100vh) translateX(0) rotate(360deg);
+                transform: translateY(100vh) rotate(360deg);
                 opacity: 0;
             }
         }
         
         @keyframes snowsway {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(30px); }
-            50% { transform: translateX(-40px); }
-            75% { transform: translateX(25px); }
+            0%, 100% { margin-left: 0px; }
+            25% { margin-left: 50px; }
+            50% { margin-left: -50px; }
+            75% { margin-left: 30px; }
         }
         
         .snowflake {
             position: fixed;
+            top: -10vh;
             pointer-events: none;
             z-index: 1;
             opacity: 0.8;
-            animation: snowfall linear forwards, snowsway 4s ease-in-out infinite;
+            width: auto;
+            height: auto;
         }
     `;
     document.head.appendChild(snowflakeStyle);
     
-    // Add snowflakes continuously
-    const snowflakeCount = 30;
-    for (let i = 0; i < snowflakeCount; i++) {
+    // Function to create a single snowflake
+    function createSnowflake() {
         const snowflake = document.createElement('img');
         snowflake.src = 'https://png.pngtree.com/png-clipart/20201009/ourmid/pngtree-blue-symmetrical-graphic-snowflake-clipart-element-png-image_2353391.jpg';
         snowflake.className = 'snowflake';
-        snowflake.style.left = Math.random() * 100 + '%';
+        
+        const startX = Math.random() * window.innerWidth;
+        const duration = 8 + Math.random() * 6;
+        const sway = 50 + Math.random() * 50;
+        
+        snowflake.style.left = startX + 'px';
         snowflake.style.width = (10 + Math.random() * 20) + 'px';
-        snowflake.style.height = 'auto';
-        snowflake.style.animationDuration = (8 + Math.random() * 6) + 's';
-        snowflake.style.animationDelay = (Math.random() * 2) + 's';
+        snowflake.style.animation = `
+            snowfall ${duration}s linear forwards,
+            snowsway ${duration * 0.3}s ease-in-out infinite
+        `;
+        
         document.body.appendChild(snowflake);
         
-        // Add new snowflakes periodically
+        // Remove after animation completes
         setTimeout(() => {
-            if (document.body.contains(snowflake)) {
-                const newSnowflake = snowflake.cloneNode(true);
-                document.body.appendChild(newSnowflake);
+            if (snowflake.parentElement) {
+                snowflake.remove();
             }
-        }, (8 + Math.random() * 6) * 1000);
+        }, duration * 1000);
     }
+    
+    // Create initial snowflakes
+    for (let i = 0; i < 30; i++) {
+        setTimeout(createSnowflake, Math.random() * 2000);
+    }
+    
+    // Create new snowflakes continuously
+    setInterval(createSnowflake, 500);
 }
 
 // Call seasonal decorations on page load
