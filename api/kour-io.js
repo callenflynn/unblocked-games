@@ -22,9 +22,9 @@ export default async function handler(req, res) {
     const baseUrl = new URL(targetUrl);
     const basePath = baseUrl.origin + baseUrl.pathname.replace(/\/$/, '');
     
-    body = body.replace(/href=["']\/(? !\/)/g, `href="${basePath}/`);
-    body = body.replace(/src=["']\/(? !\/)/g, `src="${basePath}/`);
-    body = body.replace(/action=["']\/(? !\/)/g, `action="${basePath}/`);
+    body = body.replace(/href=["']\/(?!\/)/g, `href="${basePath}/`);
+    body = body.replace(/src=["']\/(?!\/)/g, `src="${basePath}/`);
+    body = body.replace(/action=["']\/(?!\/)/g, `action="${basePath}/`);
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Access-Control-Allow-Origin', '*');
