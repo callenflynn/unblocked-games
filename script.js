@@ -268,7 +268,7 @@ function addSnowmen() {
     const snowmanStyle = document.createElement('style');
     snowmanStyle.innerHTML = `
         .snowman-decoration {
-            position: fixed;
+            position: absolute;
             bottom: 0;
             pointer-events: none;
             z-index: 2;
@@ -277,7 +277,7 @@ function addSnowmen() {
     `;
     document.head.appendChild(snowmanStyle);
     
-    // Add 1-2 snowmen at the bottom
+    // Add 1-2 snowmen at the bottom of the page
     const snowmanCount = Math.random() > 0.5 ? 1 : 2;
     for (let i = 0; i < snowmanCount; i++) {
         const snowman = document.createElement('img');
