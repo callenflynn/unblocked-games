@@ -169,7 +169,10 @@
             <li>❌ Use only if you understand the risks</li>
         </ul>
 
-        <button class="acknowledge-btn" onclick="acknowledgeWarning()">I Understand & Continue at My Own Risk</button>
+        <button class="acknowledge-btn" id="continueBtn" onclick="acknowledgeWarning()" disabled style="cursor: not-allowed; opacity: 0.5;">I Understand & Continue at My Own Risk</button>
+        <div id="countdownDisplay" style="color: rgba(255, 165, 165, 0.8); font-size: 1rem; margin-top: 10px; font-weight: bold;">
+            ⏱️ Please wait <span id="countdown">5</span> seconds...
+        </div>
         <button class="acknowledge-btn" onclick="window.location.href='index.html'" style="background: rgba(59, 130, 246, 0.3); border-color: rgba(59, 130, 246, 0.8); color: #93c5fd;">← Go Back to Safety</button>
     </div>
 
@@ -232,6 +235,26 @@
     <script>
         let proxies = [];
 
+        // 5-second countdown on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            let countdown = 5;
+            const countdownEl = document.getElementById('countdown');
+            const continueBtn = document.getElementById('continueBtn');
+            
+            const interval = setInterval(() => {
+                countdown--;
+                countdownEl.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    continueBtn.disabled = false;
+                    continueBtn.style.cursor = 'pointer';
+                    continueBtn.style.opacity = '1';
+                    document.getElementById('countdownDisplay').innerHTML = '✅ You may now proceed';
+                }
+            }, 1000);
+        });
+
         function loadProxies() {
             // Try to load from local storage first
             const stored = localStorage.getItem('randomProxies');
@@ -246,8 +269,7 @@
         }
 
         function acknowledgeWarning() {
-            document.getElementById('proxyContainer').classList.add('active');
-            loadProxies();
+            window.location.href = 'proxies.txt';
         }
 
         function displayProxies() {
