@@ -41,7 +41,14 @@ function toggleBlobCloak() {
 }
 
 function toggleBlobInfo() {
-    document.getElementById('blobInfoModal').style.display = 'block';
+    const modal = document.getElementById('blobInfoModal');
+    if (modal.style.display === 'none' || !modal.style.display) {
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+    } else {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    }
 }
 
 // Load saved settings
@@ -139,17 +146,20 @@ const span = document.getElementsByClassName('close')[0];
 if (btn) {
     btn.onclick = function() {
         modal.style.display = 'block';
+        document.body.classList.add('modal-open');
     }
 }
 
 if (span) {
     span.onclick = function() {
         modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
     }
 }
 
 function openProxiesWarning() {
     document.getElementById('proxiesWarningModal').style.display = 'block';
+    document.body.classList.add('modal-open');
     let countdown = 3;
     const btn = document.getElementById('understandBtn');
     
@@ -169,6 +179,7 @@ function openProxiesWarning() {
 
 function closeProxiesWarning() {
     document.getElementById('proxiesWarningModal').style.display = 'none';
+    document.body.classList.remove('modal-open');
 }
 
 function viewProxiesList() {
@@ -183,14 +194,17 @@ window.onclick = function(event) {
     
     if (event.target == settingsModal) {
         settingsModal.style.display = 'none';
+        document.body.classList.remove('modal-open');
     }
     
     if (event.target == blobInfoModal) {
         blobInfoModal.style.display = 'none';
+        document.body.classList.remove('modal-open');
     }
     
     if (event.target == proxiesModal) {
         proxiesModal.style.display = 'none';
+        document.body.classList.remove('modal-open');
     }
 }
 
