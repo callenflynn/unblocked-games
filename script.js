@@ -259,6 +259,39 @@ function addSnowflakes() {
     
     // Create new snowflakes continuously
     setInterval(createSnowflake, 500);
+    
+    // Add snowmen at the bottom
+    addSnowmen();
+}
+
+function addSnowmen() {
+    const snowmanStyle = document.createElement('style');
+    snowmanStyle.innerHTML = `
+        .snowman-decoration {
+            position: fixed;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.9;
+        }
+    `;
+    document.head.appendChild(snowmanStyle);
+    
+    // Add 1-2 snowmen at the bottom
+    const snowmanCount = Math.random() > 0.5 ? 1 : 2;
+    for (let i = 0; i < snowmanCount; i++) {
+        const snowman = document.createElement('img');
+        // Get the root path - works from any subdirectory
+        const baseUrl = window.location.pathname.includes('/proxies/') || window.location.pathname.includes('/games/') 
+            ? '../../snowman.png' 
+            : 'snowman.png';
+        snowman.src = baseUrl;
+        snowman.className = 'snowman-decoration';
+        snowman.style.left = (10 + Math.random() * 70) + '%';
+        snowman.style.width = '80px';
+        snowman.style.height = 'auto';
+        document.body.appendChild(snowman);
+    }
 }
 
 // Call seasonal decorations on page load
