@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Proxies - Untested & Unverified | C Unblocked Games</title>
+    <meta name="description" content="Community-contributed proxy list. WARNING: These proxies are UNTESTED and could contain malware or inappropriate content. Use at your own risk.">
+    <meta name="keywords" content="random proxies, untested proxies, proxy list, unblocked games">
+    <link rel="canonical" href="https://unblocked-games.vercel.app/random-proxies.html">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .warning-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(239, 68, 68, 0.1) 100%);
+            border: 3px solid rgba(239, 68, 68, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+            animation: pulse-warning 2s infinite;
+        }
+
+        @keyframes pulse-warning {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .warning-title {
+            font-size: 2.5rem;
+            color: #ef4444;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .warning-text {
+            font-size: 1.2rem;
+            color: #fca5a5;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .warning-list {
+            text-align: left;
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ef4444;
+        }
+
+        .warning-list li {
+            margin: 10px 0;
+            color: #fca5a5;
+            font-size: 1rem;
+        }
+
+        .acknowledge-btn {
+            background: rgba(239, 68, 68, 0.3);
+            border: 2px solid rgba(239, 68, 68, 0.8);
+            color: #fca5a5;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 20px 10px 0 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .acknowledge-btn:hover {
+            background: rgba(239, 68, 68, 0.5);
+            transform: scale(1.05);
+        }
+
+        .proxy-container {
+            display: none;
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .proxy-container.active {
+            display: block;
+        }
+
+        .proxy-input {
+            width: 100%;
+            min-height: 400px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        .proxy-controls {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .proxy-btn {
+            background: rgba(99, 102, 241, 0.2);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .proxy-btn:hover {
+            background: rgba(99, 102, 241, 0.4);
+            transform: scale(1.05);
+        }
+
+        .proxy-list-display {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 600px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .proxy-count {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎲 Random Proxies</h1>
+        <button id="settingsBtn" class="settings-btn">⚙️ Settings</button>
+    </header>
+
+    <div style="text-align: center; padding: 20px;">
+        <button class="home-btn" onclick="window.location.href='index.html'" style="display: inline-block; margin-bottom: 30px;">🏠 Back to Home</button>
+    </div>
+
+    <div class="warning-banner">
+        <div class="warning-title">⚠️ WARNING ⚠️</div>
+        <div class="warning-text">These proxies are UNTESTED and could contain MALWARE or INAPPROPRIATE CONTENT</div>
+        
+        <ul class="warning-list">
+            <li>❌ These links are NOT verified by our team</li>
+            <li>❌ They may contain harmful content or malicious code</li>
+            <li>❌ Your personal information could be at risk</li>
+            <li>❌ They may have inappropriate or adult content</li>
+            <li>❌ Use only if you understand the risks</li>
+        </ul>
+
+        <button class="acknowledge-btn" onclick="acknowledgeWarning()">I Understand & Continue at My Own Risk</button>
+        <button class="acknowledge-btn" onclick="window.location.href='index.html'" style="background: rgba(59, 130, 246, 0.3); border-color: rgba(59, 130, 246, 0.8); color: #93c5fd;">← Go Back to Safety</button>
+    </div>
+
+    <div class="proxy-container" id="proxyContainer">
+        <h2 style="text-align: center; color: #a78bfa;">Proxy List (Community Contributed)</h2>
+        <p style="text-align: center; color: rgba(255, 255, 255, 0.7); margin-bottom: 30px;">One proxy per line. Click a link to try it, or copy and paste the entire list below.</p>
+
+        <div class="proxy-controls">
+            <button class="proxy-btn" onclick="copyAllProxies()">📋 Copy All Proxies</button>
+            <button class="proxy-btn" onclick="downloadProxies()">📥 Download as Text</button>
+            <button class="proxy-btn" onclick="openRandomProxy()">🎲 Try Random Proxy</button>
+        </div>
+
+        <div class="proxy-count" id="proxyCount">Proxies loaded: 0</div>
+
+        <div class="proxy-list-display" id="proxyList">
+            Loading proxy list...
+        </div>
+
+        <div class="proxy-controls">
+            <button class="proxy-btn" onclick="window.location.href='index.html'">← Back to Home</button>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Settings</h2>
+            <div class="setting-group">
+                <label for="tabName">Custom Tab Name:</label>
+                <input type="text" id="tabName" placeholder="Enter custom tab name">
+                <button onclick="applyTabName()">Apply</button>
+            </div>
+            <div class="setting-group">
+                <label>Tab Icon:</label>
+                <div class="icon-options">
+                    <button class="icon-btn" onclick="setTabIcon('google-classroom')">
+                        <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom">
+                        <span>Google Classroom</span>
+                    </button>
+                    <button class="icon-btn" onclick="setTabIcon('google-docs')">
+                        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs">
+                        <span>Google Docs</span>
+                    </button>
+                    <button class="icon-btn" onclick="setTabIcon('google-drive')">
+                        <img src="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" alt="Google Drive">
+                        <span>Google Drive</span>
+                    </button>
+                    <button class="icon-btn" onclick="setTabIcon('default')">
+                        <span>🎮</span>
+                        <span>Default</span>
+                    </button>
+                </div>
+            </div>
+            <button class="reset-btn" onclick="resetSettings()">Reset to Default</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let proxies = [];
+
+        function loadProxies() {
+            // Try to load from local storage first
+            const stored = localStorage.getItem('randomProxies');
+            if (stored) {
+                proxies = stored.split('\n').filter(p => p.trim());
+                displayProxies();
+            } else {
+                // Placeholder - user will paste proxies
+                document.getElementById('proxyList').innerHTML = '<p style="color: rgba(255, 255, 255, 0.5); text-align: center; padding: 40px;">No proxies loaded yet. Paste proxy links in the form below.</p>';
+                document.getElementById('proxyCount').textContent = 'Proxies loaded: 0';
+            }
+        }
+
+        function acknowledgeWarning() {
+            document.getElementById('proxyContainer').classList.add('active');
+            loadProxies();
+        }
+
+        function displayProxies() {
+            const proxyList = document.getElementById('proxyList');
+            if (proxies.length === 0) {
+                proxyList.innerHTML = '<p style="color: rgba(255, 255, 255, 0.5); text-align: center; padding: 40px;">No proxies loaded. Try adding some proxy links.</p>';
+            } else {
+                proxyList.innerHTML = proxies.map((p, i) => 
+                    `<a href="https://${p}" target="_blank" style="display: block; color: #60a5fa; text-decoration: none; padding: 5px 0; border-bottom: 1px solid rgba(96, 165, 250, 0.2); transition: all 0.2s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='#60a5fa'">${(i+1)}. ${p}</a>`
+                ).join('');
+            }
+            document.getElementById('proxyCount').textContent = `Proxies loaded: ${proxies.length}`;
+        }
+
+        function copyAllProxies() {
+            const text = proxies.join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ All proxies copied to clipboard!');
+            }).catch(() => {
+                alert('❌ Failed to copy proxies');
+            });
+        }
+
+        function downloadProxies() {
+            const text = proxies.join('\n');
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'proxies.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function openRandomProxy() {
+            if (proxies.length === 0) {
+                alert('No proxies available');
+                return;
+            }
+            const randomProxy = proxies[Math.floor(Math.random() * proxies.length)];
+            window.open(`https://${randomProxy}`, '_blank');
+        }
+
+        // Load proxies on page load
+        loadProxies();
+
+        // Modal functionality
+        const modal = document.getElementById('settingsModal');
+        const btn = document.getElementById('settingsBtn');
+        const span = document.getElementsByClassName('close')[0];
+
+        if (btn) {
+            btn.onclick = function() {
+                modal.style.display = 'block';
+            }
+        }
+
+        if (span) {
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

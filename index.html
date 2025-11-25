@@ -44,14 +44,14 @@
                 <li style="padding: 10px 0; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
                     <span style="font-size: 1.5rem;">🌐</span>
                     <div>
-                        <strong style="color: #f59e0b;">40+ Proxy Links</strong>
+                        <strong style="color: #f59e0b;">2000+ Proxy Links</strong>
                         <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Unblock any website with verified proxies</p>
                     </div>
                 </li>
                 <li style="padding: 10px 0; display: flex; align-items: center; gap: 15px;">
                     <span style="font-size: 1.5rem;">🎮</span>
                     <div>
-                        <strong style="color: #ec4899;">14+ Games</strong>
+                        <strong style="color: #ec4899;">Games</strong>
                         <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Play popular unblocked games anytime</p>
                     </div>
                 </li>
@@ -221,6 +221,7 @@
         
         <div style="text-align: center; margin-bottom: 30px;">
             <button class="proxy-btn" onclick="window.location.href='proxies/index.html'" style="font-size: 1.2rem; padding: 20px 40px;">📂 Browse All Proxy Types</button>
+            <button class="proxy-btn" onclick="openProxiesWarning()" style="font-size: 1.2rem; padding: 20px 40px; background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.3); margin-left: 10px;">📋 View Untested Proxy List</button>
         </div>
 
         <main class="gallery-container">
@@ -329,6 +330,14 @@
                 </div>
                 <h3>Junkyard</h3>
                 <p style="color: #ef4444;">⚠️ Currently Unavailable</p>
+            </div>
+
+            <div class="game-card" onclick="window.location.href='random-proxies.html'" style="cursor: pointer; border: 2px solid rgba(239, 68, 68, 0.5); background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);">
+                <div class="game-thumbnail" style="background: rgba(239, 68, 68, 0.15);">
+                    <div class="game-icon">🎲</div>
+                </div>
+                <h3>Random Proxies</h3>
+                <p style="color: #ef4444;">⚠️ Untested & Unverified</p>
             </div>
         </main>
     </section>
@@ -488,7 +497,6 @@
             document.body.style.paddingTop = '180px';
         }
 
-        // Fetch and display version info
         async function loadVersionInfo() {
             try {
                 const response = await fetch('/api/version');
@@ -508,5 +516,54 @@
         
         loadVersionInfo();
     </script>
+
+    <!-- Proxies Warning Modal -->
+    <div id="proxiesWarningModal" class="modal" style="display: none; z-index: 5000;">
+        <div class="modal-content" style="max-width: 600px; border: 3px solid rgba(239, 68, 68, 0.8);">
+            <h2 style="color: #ef4444; text-align: center; font-size: 1.8rem; margin-top: 0;">⚠️ CRITICAL WARNING ⚠️</h2>
+            
+            <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 20px; margin: 20px 0; border-radius: 5px;">
+                <p style="color: #fca5a5; font-weight: bold; font-size: 1.1rem; margin: 0 0 15px 0;">
+                    THE PROXIES IN THIS LIST ARE COMPLETELY UNTESTED
+                </p>
+                <p style="color: #fca5a5; margin: 0;">
+                    I have NOT personally tested these proxies. They may contain:
+                </p>
+                <ul style="color: #fca5a5; margin: 10px 0; padding-left: 20px;">
+                    <li>🔴 VIOLENCE and graphic content</li>
+                    <li>🔴 NSFW and adult content</li>
+                    <li>🔴 MALWARE and viruses</li>
+                    <li>🔴 Illegal content</li>
+                    <li>🔴 Phishing and scams</li>
+                    <li>🔴 Privacy violations</li>
+                    <li>🔴 Any other harmful material</li>
+                </ul>
+            </div>
+
+            <div style="background: rgba(99, 102, 241, 0.1); border-left: 4px solid #60a5fa; padding: 20px; margin: 20px 0; border-radius: 5px;">
+                <p style="color: #93c5fd; font-weight: bold; margin: 0 0 10px 0;">✅ MY RECOMMENDATION:</p>
+                <p style="color: #93c5fd; margin: 0;">
+                    <strong>Please use the tested proxies instead:</strong> Interstellar and Space are verified safe and reliable. Only use this untested list if you fully understand the risks.
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <p id="countdownText" style="color: rgba(255, 255, 255, 0.7); margin-bottom: 15px; font-size: 1.1rem;">
+                    ⏱️ Please wait <strong id="countdown">3</strong> seconds before proceeding...
+                </p>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button onclick="closeProxiesWarning()" class="proxy-btn" style="background: rgba(99, 102, 241, 0.2); border-color: rgba(99, 102, 241, 0.3);">← Go Back</button>
+                <button id="understandBtn" onclick="viewProxiesList()" class="proxy-btn" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.3); cursor: not-allowed; opacity: 0.5;" disabled>
+                    I Understand & Continue
+                </button>
+            </div>
+
+            <p style="text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin: 15px 0 0 0;">
+                By clicking "I Understand", you accept all risks and responsibility for any content found.
+            </p>
+        </div>
+    </div>
 </body>
 </html>

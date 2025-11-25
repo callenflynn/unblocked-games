@@ -148,9 +148,38 @@ if (span) {
     }
 }
 
+function openProxiesWarning() {
+    document.getElementById('proxiesWarningModal').style.display = 'block';
+    let countdown = 3;
+    const btn = document.getElementById('understandBtn');
+    
+    const interval = setInterval(() => {
+        countdown--;
+        document.getElementById('countdown').textContent = countdown;
+        
+        if (countdown <= 0) {
+            clearInterval(interval);
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+            document.getElementById('countdownText').innerHTML = '✅ You may now proceed';
+        }
+    }, 1000);
+}
+
+function closeProxiesWarning() {
+    document.getElementById('proxiesWarningModal').style.display = 'none';
+}
+
+function viewProxiesList() {
+    window.open('proxies.txt', '_blank');
+    closeProxiesWarning();
+}
+
 window.onclick = function(event) {
     const settingsModal = document.getElementById('settingsModal');
     const blobInfoModal = document.getElementById('blobInfoModal');
+    const proxiesModal = document.getElementById('proxiesWarningModal');
     
     if (event.target == settingsModal) {
         settingsModal.style.display = 'none';
@@ -158,6 +187,10 @@ window.onclick = function(event) {
     
     if (event.target == blobInfoModal) {
         blobInfoModal.style.display = 'none';
+    }
+    
+    if (event.target == proxiesModal) {
+        proxiesModal.style.display = 'none';
     }
 }
 
