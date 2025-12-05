@@ -545,7 +545,8 @@ const allGames = [
     { name: 'Moto Race City', icon: '🏍️', path: 'moto-race-city' },
     { name: 'Polytrack', icon: '🏎️', path: 'polytrack' },
     { name: 'Vex 7', icon: '🎭', path: 'vex-7' },
-    { name: 'ChatGPT', icon: '💬', path: 'chatgpt' }
+    { name: 'ChatGPT', icon: '💬', path: 'chatgpt' },
+    { name: 'Borg Games', icon: '🎲', path: 'borg-games' }
 ];
 
 // Load random games in sidebar
