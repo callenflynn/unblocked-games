@@ -373,7 +373,7 @@ function closeProxiesWarning() {
 }
 
 function viewProxiesList() {
-    window.location.href = 'random-proxies.html';
+    window.location.href = 'proxies.txt';
 }
 
 window.onclick = function(event) {
