@@ -309,6 +309,7 @@ if (document.readyState === 'loading') {
 const modal = document.getElementById('settingsModal');
 const btn = document.getElementById('settingsBtn');
 const span = document.getElementsByClassName('close')[0];
+let proxiesCountdownInterval; // holds the active countdown timer for the proxies warning modal
 
 if (btn) {
     btn.onclick = function() {
@@ -325,32 +326,54 @@ if (span) {
 }
 
 function openProxiesWarning() {
-    document.getElementById('proxiesWarningModal').style.display = 'block';
-    document.body.classList.add('modal-open');
+    // Reset any existing countdown to avoid overlapping timers
+    if (proxiesCountdownInterval) {
+        clearInterval(proxiesCountdownInterval);
+    }
+
+    const modalEl = document.getElementById('proxiesWarningModal');
+    const countdownTextEl = document.getElementById('countdownText');
+    const btnEl = document.getElementById('understandBtn');
+
     let countdown = 5;
-    const btn = document.getElementById('understandBtn');
-    
-    const interval = setInterval(() => {
-        countdown--;
-        document.getElementById('countdown').textContent = countdown;
-        
+
+    // Reset UI state on every open
+    countdownTextEl.innerHTML = '⏱️ Please wait <strong id="countdown">5</strong> seconds before proceeding...';
+    const countdownEl = document.getElementById('countdown');
+    countdownEl.textContent = countdown;
+    btnEl.disabled = true;
+    btnEl.style.opacity = '0.5';
+    btnEl.style.cursor = 'not-allowed';
+
+    modalEl.style.display = 'block';
+    document.body.classList.add('modal-open');
+
+    proxiesCountdownInterval = setInterval(() => {
+        countdown -= 1;
+        countdownEl.textContent = countdown;
+
         if (countdown <= 0) {
-            clearInterval(interval);
-            btn.disabled = false;
-            btn.style.opacity = '1';
-            btn.style.cursor = 'pointer';
-            document.getElementById('countdownText').innerHTML = '✅ You may now proceed';
+            clearInterval(proxiesCountdownInterval);
+            proxiesCountdownInterval = null;
+            btnEl.disabled = false;
+            btnEl.style.opacity = '1';
+            btnEl.style.cursor = 'pointer';
+            countdownTextEl.innerHTML = '✅ You may now proceed.';
         }
     }, 1000);
 }
 
 function closeProxiesWarning() {
+    if (proxiesCountdownInterval) {
+        clearInterval(proxiesCountdownInterval);
+        proxiesCountdownInterval = null;
+    }
     document.getElementById('proxiesWarningModal').style.display = 'none';
     document.body.classList.remove('modal-open');
 }
 
 function viewProxiesList() {
-    window.location.href = 'proxies/index.html';
+    window.location.href = 'random-proxies.html';
 }
 
 window.onclick = function(event) {
@@ -546,7 +569,7 @@ const allGames = [
     { name: 'Vex 7', icon: '🎭', path: 'vex-7' },
     { name: 'ChatGPT', icon: '💬', path: 'chatgpt' },
     { name: 'Borg Games', icon: '🎲', path: 'borg-games' },
-    { name: 'Math Study Help', icon: '📚', path: 'math-doc' },
+    { name: 'Math Game Links', icon: '📚', path: 'math-doc' },
     { name: 'Polaroid v2.0', icon: '📸', path: 'polaroid-doc' }
 ];
 
