@@ -350,8 +350,7 @@ function closeProxiesWarning() {
 }
 
 function viewProxiesList() {
-    window.open('proxies.txt', '_blank');
-    closeProxiesWarning();
+    window.location.href = 'proxies/index.html';
 }
 
 window.onclick = function(event) {
