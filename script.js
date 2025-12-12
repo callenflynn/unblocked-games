@@ -5,20 +5,59 @@ const iconUrls = {
     'default': ''
 };
 
-function enableBlobCloak() {
+async function enableBlobCloak() {
     if (window.location.protocol === 'blob:') return; // Already cloaked
     
-    fetch(window.location.href)
-        .then(response => response.text())
-        .then(html => {
-            const blob = new Blob([html], { type: 'text/html' });
-            const blobUrl = URL.createObjectURL(blob);
+    try {
+        const response = await fetch(window.location.href);
+        let html = await response.text();
+        
+        // Create a temporary DOM to parse and process resources
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Inline CSS files
+        const styleLinks = doc.querySelectorAll('link[rel="stylesheet"]');
+        for (const link of styleLinks) {
+            try {
+                const cssResponse = await fetch(link.href);
+                const cssText = await cssResponse.text();
+                const style = doc.createElement('style');
+                style.textContent = cssText;
+                link.replaceWith(style);
+            } catch (e) {
+                console.warn('Failed to inline CSS:', link.href, e);
+            }
+        }
+        
+        // Inline JavaScript files
+        const scripts = doc.querySelectorAll('script[src]');
+        for (const script of scripts) {
+            // Skip external ad scripts - they need to load from their domain
+            if (script.src.includes('a-ads.com')) continue;
             
-            window.location.replace(blobUrl);
-        })
-        .catch(error => {
-            console.error('Blob cloaking failed:', error);
-        });
+            try {
+                const jsResponse = await fetch(script.src);
+                const jsText = await jsResponse.text();
+                const inlineScript = doc.createElement('script');
+                inlineScript.textContent = jsText;
+                script.replaceWith(inlineScript);
+            } catch (e) {
+                console.warn('Failed to inline JS:', script.src, e);
+            }
+        }
+        
+        // Convert the modified document back to HTML
+        const serializer = new XMLSerializer();
+        const modifiedHtml = serializer.serializeToString(doc);
+        
+        const blob = new Blob([modifiedHtml], { type: 'text/html' });
+        const blobUrl = URL.createObjectURL(blob);
+        
+        window.location.replace(blobUrl);
+    } catch (error) {
+        console.error('Blob cloaking failed:', error);
+    }
 }
 
 function toggleBlobCloak() {
