@@ -63,10 +63,9 @@ async function enableBlobCloak() {
 function toggleBlobCloak() {
     const toggle = document.getElementById('blobCloakToggle');
     if (toggle.checked) {
-        localStorage.setItem('blobCloakEnabled', 'true');
+        // Don't save to localStorage - only enable for this session
         enableBlobCloak();
     } else {
-        localStorage.setItem('blobCloakEnabled', 'false');
         // Reload to normal URL
         if (window.location.protocol === 'blob:') {
             window.location.href = window.location.origin;
@@ -88,7 +87,6 @@ function toggleBlobInfo() {
 function loadSettings() {
     const savedTitle = localStorage.getItem('customTabName');
     const savedIcon = localStorage.getItem('customTabIcon');
-    const blobCloakEnabled = localStorage.getItem('blobCloakEnabled') === 'true';
     
     if (savedTitle) {
         document.title = savedTitle;
@@ -98,13 +96,15 @@ function loadSettings() {
         setFavicon(savedIcon);
     }
     
+    // Always uncheck blob cloak on reload - it should never persist
     const toggle = document.getElementById('blobCloakToggle');
     if (toggle) {
-        toggle.checked = blobCloakEnabled;
+        toggle.checked = false;
     }
     
-    if (blobCloakEnabled && window.location.protocol !== 'blob:') {
-        enableBlobCloak();
+    // If we're on a blob URL, redirect back to normal
+    if (window.location.protocol === 'blob:') {
+        window.location.href = window.location.origin + window.location.pathname.replace(/^blob:/, '');
     }
 }
 
@@ -154,7 +154,6 @@ function applyCustomIcon() {
 function resetSettings() {
     localStorage.removeItem('customTabName');
     localStorage.removeItem('customTabIcon');
-    localStorage.removeItem('blobCloakEnabled');
     document.title = 'C Unblocked Games';
     const link = document.querySelector("link[rel~='icon']");
     if (link) link.remove();
